@@ -1,0 +1,10 @@
+{
+  "areaSize" : [5, 5],
+  "startingPosition" : [1, 2],
+  "oilPatches" : [
+    [1, 0],
+    [2, 2],
+    [2, 3]
+  ],
+  "navigationInstructions" : "NNESEESWNWW"
+}

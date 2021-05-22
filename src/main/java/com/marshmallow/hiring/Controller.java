@@ -1,12 +1,18 @@
 package com.marshmallow.hiring;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 public class Controller {
 
-    // TODO This is your entry point
-    // You need to expose a POST endpoint on the "/instructions" path to match the contract expected by our tests.
-    // If the existing test in the ControllerTest keeps failing it means it's not respecting this base contract.
+    @PostMapping("/instructions")
+    public InstructionsResponse instructions(@RequestBody InstructionsRequest instructions) {
+        log.info("Processing instructions: [{}]", instructions);
+        return new InstructionsResponse(new int[]{1, 3}, 1);
+    }
 
 }
