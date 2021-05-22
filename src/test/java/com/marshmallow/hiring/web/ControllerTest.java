@@ -1,4 +1,4 @@
-package com.marshmallow.hiring;
+package com.marshmallow.hiring.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

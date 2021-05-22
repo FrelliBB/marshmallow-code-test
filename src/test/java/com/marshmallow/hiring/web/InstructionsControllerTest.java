@@ -1,4 +1,4 @@
-package com.marshmallow.hiring;
+package com.marshmallow.hiring.web;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
