@@ -14,6 +14,10 @@ public class Vector {
     int x;
     int y;
 
+    public Vector add(Vector addend) {
+        return Vector.of(x + addend.x, y + addend.y);
+    }
+
     static class ToArrayConverter extends StdConverter<Vector, int[]> {
 
         @Override
