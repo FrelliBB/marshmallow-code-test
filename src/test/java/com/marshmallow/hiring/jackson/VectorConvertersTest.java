@@ -1,4 +1,4 @@
-package com.marshmallow.hiring;
+package com.marshmallow.hiring.jackson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marshmallow.hiring.domain.Vector;
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @JsonTest
-class VectorSerializationTest {
+class VectorConvertersTest {
 
     @Autowired
     private ObjectMapper objectMapper;
