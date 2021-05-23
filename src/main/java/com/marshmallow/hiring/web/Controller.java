@@ -11,13 +11,11 @@ import com.marshmallow.hiring.web.model.InstructionsResponse;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -25,7 +23,7 @@ import java.util.List;
 public class Controller {
 
     @PostMapping("/instructions")
-    public InstructionsResponse instructions(@RequestBody InstructionsRequest instructions) {
+    public InstructionsResponse instructions(@RequestBody @Valid InstructionsRequest instructions) {
         log.info("Handling request: [" + instructions + "]");
         Robot robot = new Robot(instructions.getAreaSize(), instructions.getStartingPosition(), instructions.getOilPatches());
         List<Direction> directions = Direction.parseNavigationInstructions(instructions.getNavigationInstructions());
@@ -38,17 +36,20 @@ public class Controller {
             InvalidSeaAreaSizeException.class,
             PositionOutOfSeaAreaBoundsException.class,
             VectorDeserializationException.class,
-            MethodArgumentNotValidException.class
+            MethodArgumentNotValidException.class,
+            HttpMessageNotReadableException.class
     })
-    public ResponseEntity<ApiError> handleKnownException(RuntimeException ex) {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handleKnownException(Exception ex) {
         log.warn("Exception thrown while handling request.", ex);
-        return ResponseEntity.badRequest().body(new ApiError(ex.getMessage()));
+        return new ApiError(ex.getMessage());
     }
 
     @ExceptionHandler
-    public ResponseEntity<ApiError> handleException(RuntimeException ex) {
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ApiError handleException(Exception ex) {
         log.error("Exception thrown while handling request.", ex);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiError(ex.getMessage()));
+        return new ApiError(ex.getMessage());
     }
 
     @Value

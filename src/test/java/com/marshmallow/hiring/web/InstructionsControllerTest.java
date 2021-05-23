@@ -2,14 +2,16 @@ package com.marshmallow.hiring.web;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import static java.lang.ClassLoader.getSystemResource;
+import static java.lang.String.format;
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
@@ -19,8 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest
 class InstructionsControllerTest {
 
     private static final MockHttpServletRequestBuilder REQUEST_BUILDER =
@@ -44,5 +45,19 @@ class InstructionsControllerTest {
         mockMvc.perform(REQUEST_BUILDER.content(request))
                 .andExpect(status().isOk())
                 .andExpect(content().json(response));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "invalidVectorRequest",
+            "invalidNavigationInstruction",
+            "invalidSeaAreSize",
+            "invalidNavigationPath",
+            "invalidOilPatchLocation"
+    })
+    void invalidRequests_returns400BadRequest(String file) throws Exception {
+        String request = readFile(format("invalidRequests/%s.json", file));
+        mockMvc.perform(REQUEST_BUILDER.content(request))
+                .andExpect(status().isBadRequest());
     }
 }
