@@ -1,7 +1,6 @@
 package com.marshmallow.hiring.domain;
 
 import com.marshmallow.hiring.exception.InvalidSeaAreaSizeException;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -49,10 +48,4 @@ class SeaAreaTest {
         assertThat(seaArea.isValidLocation(location)).isEqualTo(isValid);
     }
 
-    @Test
-    public void nullAreaSize_throwsNullPointerException() {
-        assertThatThrownBy(() -> new SeaArea(null))
-                .isInstanceOf(NullPointerException.class)
-                .hasMessage("areaSize must not be null");
-    }
 }

@@ -1,4 +1,4 @@
-package com.marshmallow.hiring.web;
+package com.marshmallow.hiring.web.model;
 
 import com.marshmallow.hiring.domain.Vector;
 import lombok.Value;

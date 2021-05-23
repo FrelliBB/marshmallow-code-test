@@ -1,20 +1,23 @@
 package com.marshmallow.hiring.domain;
 
 import com.marshmallow.hiring.exception.InvalidSeaAreaSizeException;
-import lombok.Value;
+import lombok.ToString;
 
-import static java.util.Objects.requireNonNull;
-
-@Value
+@ToString
 public class SeaArea {
 
-    Vector areaSize;
+    private final Vector areaSize;
 
-    public SeaArea(Vector areaSize) {
-        requireNonNull(areaSize, "areaSize must not be null");
+    SeaArea(Vector areaSize) {
         requireValidAreaSize(areaSize);
-
         this.areaSize = areaSize;
+    }
+
+    private static void requireValidAreaSize(Vector areaSize) {
+        if (areaSize.getX() <= 0 || areaSize.getY() <= 0) {
+            throw new InvalidSeaAreaSizeException(String.format("The given sea are dimensions [%s] are invalid. " +
+                    "The dimensions must be at least 1 row and 1 column wide.", areaSize));
+        }
     }
 
     public boolean isValidLocation(Vector location) {
@@ -24,13 +27,6 @@ public class SeaArea {
 
     private boolean isInDimensionRange(int value, int dimensionLength) {
         return value >= 0 && value < dimensionLength;
-    }
-
-    private static void requireValidAreaSize(Vector areaSize) {
-        if (areaSize.getX() <= 0 || areaSize.getY() <= 0) {
-            throw new InvalidSeaAreaSizeException(String.format("The given sea are dimensions [%s] are invalid. " +
-                    "The dimensions must be at least 1 row and 1 column wide.", areaSize));
-        }
     }
 
 }

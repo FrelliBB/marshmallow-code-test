@@ -1,6 +1,5 @@
 package com.marshmallow.hiring.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -59,19 +58,4 @@ class OilCleanerTest {
         assertThat(cleaner.getOilPatchesCleaned()).isEqualTo(1);
     }
 
-    @Test
-    public void cleanLocation_null_nullPointerException() {
-        OilCleaner cleaner = new OilCleaner(OIL_PATCHES);
-
-        Assertions.assertThatThrownBy(() -> cleaner.cleanLocation(null))
-                .isInstanceOf(NullPointerException.class)
-                .hasMessage("location must not be null");
-    }
-
-    @Test
-    public void newOilCleaner_null_nullPointerException() {
-        Assertions.assertThatThrownBy(() -> new OilCleaner(null))
-                .isInstanceOf(NullPointerException.class)
-                .hasMessage("oilPatchLocations must not be null");
-    }
 }
