@@ -78,6 +78,12 @@ since you know that the state you initialize an object in will be its state fore
   sure that these endpoints are not publicly accessible, either via the application level security with Spring Security,
   or at the network level using a firewall (or both).
 
+### Potential Improvements
+
+- Depending on the end-user of this API, we might want to add more descriptive information to the error responses in 4xx
+  responses. In some situations such as deserialization failure or constraints violations the returned error message is
+  not that pretty.
+
 ---
 
 I hope you find this implementation satisfactory, and I'm looking forward to hearing from you.
