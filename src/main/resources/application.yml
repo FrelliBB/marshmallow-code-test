@@ -1,0 +1,17 @@
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - metrics
+          - prometheus
+          - jolokia
+          - hawtio
+          - threaddump
+          - heapdump
+
+hawtio:
+  authenticationEnabled: false
