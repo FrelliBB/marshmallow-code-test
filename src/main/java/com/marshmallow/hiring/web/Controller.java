@@ -8,6 +8,7 @@ import com.marshmallow.hiring.exception.PositionOutOfSeaAreaBoundsException;
 import com.marshmallow.hiring.exception.VectorDeserializationException;
 import com.marshmallow.hiring.web.model.InstructionsRequest;
 import com.marshmallow.hiring.web.model.InstructionsResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+
 @Slf4j
 @RestController
 public class Controller {
 
     @PostMapping("/instructions")
+    @Operation(tags = "Instructions", summary = "Process navigation instructions")
     public InstructionsResponse instructions(@RequestBody @Valid InstructionsRequest instructions) {
         log.info("Handling request: [" + instructions + "]");
         Robot robot = new Robot(instructions.getAreaSize(), instructions.getStartingPosition(), instructions.getOilPatches());

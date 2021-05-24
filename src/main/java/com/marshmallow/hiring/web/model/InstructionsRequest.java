@@ -11,7 +11,10 @@ import java.util.Set;
 @Value
 public class InstructionsRequest {
 
+    @NotNull
     Vector areaSize;
+
+    @NotNull
     Vector startingPosition;
 
     @NotNull

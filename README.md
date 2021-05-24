@@ -1,5 +1,11 @@
 # M4R-5H Oil Cleaner
 
+
+| [API Documentation](http://localhost:8080/swagger-ui.html) | 
+
+[comment]: <> (I would normally link to a staging or production environment for the above URLs rather than the 
+localhost version.)
+
 The M4R-5H oil cleaner is a robot designed to handle navigating a patch of sea and clean up any oil patches it traverses
 over. The application exposes a REST API for accepting a set of parameters and instructions, and will respond with the
 robot's status after simulating the instructions.
