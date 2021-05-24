@@ -41,6 +41,7 @@ all possible edge cases at once. The three components are:
 - If the Robot's starting position is on an oil patch, that patch is automatically cleaned.
 - There can only be a single oil patch at a specified co-ordinate, any duplicate oil patch co-ordinates in the request
   are ignored.
+- The `int` data type is large enough (2,147,483,647) for handling co-ordinate values.
 
 ### Immutability
 
