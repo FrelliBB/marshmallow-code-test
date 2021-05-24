@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 
+import static com.marshmallow.hiring.domain.Vector.vector;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unused")
@@ -13,11 +14,11 @@ class VectorTest {
 
     private static List<Arguments> addVectors_arguments() {
         return List.of(
-                Arguments.of(Vector.of(0, 0), Vector.of(0, 0), Vector.of(0, 0)),
-                Arguments.of(Vector.of(0, 0), Vector.of(1, 0), Vector.of(1, 0)),
-                Arguments.of(Vector.of(0, 0), Vector.of(0, 1), Vector.of(0, 1)),
-                Arguments.of(Vector.of(0, 0), Vector.of(0, -1), Vector.of(0, -1)),
-                Arguments.of(Vector.of(0, 0), Vector.of(-1, 0), Vector.of(-1, 0))
+                Arguments.of(vector(0, 0), vector(0, 0), vector(0, 0)),
+                Arguments.of(vector(0, 0), vector(1, 0), vector(1, 0)),
+                Arguments.of(vector(0, 0), vector(0, 1), vector(0, 1)),
+                Arguments.of(vector(0, 0), vector(0, -1), vector(0, -1)),
+                Arguments.of(vector(0, 0), vector(-1, 0), vector(-1, 0))
         );
     }
 

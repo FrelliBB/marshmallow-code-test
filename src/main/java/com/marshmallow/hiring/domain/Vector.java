@@ -7,7 +7,7 @@ import lombok.Value;
 import static com.marshmallow.hiring.jackson.VectorConverters.FromArrayConverter;
 import static com.marshmallow.hiring.jackson.VectorConverters.ToArrayConverter;
 
-@Value(staticConstructor = "of")
+@Value
 @JsonSerialize(converter = ToArrayConverter.class)
 @JsonDeserialize(converter = FromArrayConverter.class)
 public class Vector {
@@ -15,8 +15,12 @@ public class Vector {
     int x;
     int y;
 
+    public static Vector vector(int x, int y) {
+        return new Vector(x, y);
+    }
+
     public Vector add(Vector addend) {
-        return Vector.of(x + addend.x, y + addend.y);
+        return new Vector(x + addend.x, y + addend.y);
     }
 
 }

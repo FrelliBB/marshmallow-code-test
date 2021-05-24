@@ -9,6 +9,7 @@ import java.util.Set;
 
 import static com.marshmallow.hiring.domain.Direction.N;
 import static com.marshmallow.hiring.domain.Direction.parseNavigationInstructions;
+import static com.marshmallow.hiring.domain.Vector.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,9 +17,9 @@ class RobotTest {
 
     @Test
     void initializeRobot() {
-        Vector area = Vector.of(5, 5);
-        Vector startingPosition = Vector.of(0, 0);
-        Set<Vector> oilPatches = Set.of(Vector.of(1, 1));
+        Vector area = vector(5, 5);
+        Vector startingPosition = vector(0, 0);
+        Set<Vector> oilPatches = Set.of(vector(1, 1));
 
         Robot robot = new Robot(area, startingPosition, oilPatches);
         RobotStatus status = robot.getStatus();
@@ -29,9 +30,9 @@ class RobotTest {
 
     @Test
     void initializeRobot_oilPatchOnStartingPosition_oilPatchCleaned() {
-        Vector area = Vector.of(1, 1);
-        Vector startingPosition = Vector.of(0, 0);
-        Set<Vector> oilPatches = Set.of(Vector.of(0, 0));
+        Vector area = vector(1, 1);
+        Vector startingPosition = vector(0, 0);
+        Set<Vector> oilPatches = Set.of(vector(0, 0));
 
         Robot robot = new Robot(area, startingPosition, oilPatches);
         RobotStatus status = robot.getStatus();
@@ -42,9 +43,9 @@ class RobotTest {
 
     @Test
     void initializeRobot_oilPatchOutOfBounds_throwsPositionOutOfSeaAreaBoundsException() {
-        Vector area = Vector.of(1, 1);
-        Vector startingPosition = Vector.of(0, 0);
-        Set<Vector> oilPatches = Set.of(Vector.of(1, 0));
+        Vector area = vector(1, 1);
+        Vector startingPosition = vector(0, 0);
+        Set<Vector> oilPatches = Set.of(vector(1, 0));
 
         assertThatThrownBy(() -> new Robot(area, startingPosition, oilPatches))
                 .isInstanceOf(PositionOutOfSeaAreaBoundsException.class);
@@ -52,8 +53,8 @@ class RobotTest {
 
     @Test
     void navigate_outOfAreaBounds_throwsPositionOutOfSeaAreaBoundsException() {
-        Vector area = Vector.of(1, 1);
-        Vector startingPosition = Vector.of(0, 0);
+        Vector area = vector(1, 1);
+        Vector startingPosition = vector(0, 0);
 
         Robot robot = new Robot(area, startingPosition, Collections.emptySet());
 
@@ -63,15 +64,15 @@ class RobotTest {
 
     @Test
     void navigate_exampleUseCase_statusCorrect() {
-        Vector area = Vector.of(5, 5);
-        Vector startingPosition = Vector.of(1, 2);
-        Set<Vector> oilPatches = Set.of(Vector.of(1, 0), Vector.of(2, 2), Vector.of(2, 3));
+        Vector area = vector(5, 5);
+        Vector startingPosition = vector(1, 2);
+        Set<Vector> oilPatches = Set.of(vector(1, 0), vector(2, 2), vector(2, 3));
         List<Direction> directions = parseNavigationInstructions("NNESEESWNWW");
 
         Robot robot = new Robot(area, startingPosition, oilPatches).navigate(directions);
         RobotStatus status = robot.getStatus();
 
-        Vector expectedFinalPosition = Vector.of(1, 3);
+        Vector expectedFinalPosition = vector(1, 3);
         int expectedOilPatchesCleaned = 1;
         assertThat(status.getPosition()).isEqualTo(expectedFinalPosition);
         assertThat(status.getOilPatchesCleaned()).isEqualTo(expectedOilPatchesCleaned);

@@ -5,16 +5,17 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import static com.marshmallow.hiring.domain.Vector.vector;
 import static java.util.stream.Collectors.toList;
 
 @Getter
 @RequiredArgsConstructor
 public enum Direction {
 
-    N(Vector.of(0, 1)),
-    E(Vector.of(1, 0)),
-    S(Vector.of(0, -1)),
-    W(Vector.of(-1, 0));
+    N(vector(0, 1)),
+    E(vector(1, 0)),
+    S(vector(0, -1)),
+    W(vector(-1, 0));
 
     private final Vector vector;
 

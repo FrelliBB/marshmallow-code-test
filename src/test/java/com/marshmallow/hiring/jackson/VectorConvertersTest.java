@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 
+import static com.marshmallow.hiring.domain.Vector.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -18,7 +19,7 @@ class VectorConvertersTest {
 
     @Test
     public void serializeVector() throws Exception {
-        Vector v = Vector.of(0, 0);
+        Vector v = vector(0, 0);
         String serialized = objectMapper.writeValueAsString(v);
         assertThat(serialized).isEqualTo("[0,0]");
     }
@@ -27,7 +28,7 @@ class VectorConvertersTest {
     public void deserializeVector_validValue() throws Exception {
         String json = "[1,2]";
         Vector vector = objectMapper.readValue(json, Vector.class);
-        assertThat(vector).isEqualTo(Vector.of(1, 2));
+        assertThat(vector).isEqualTo(vector(1, 2));
     }
 
     @Test

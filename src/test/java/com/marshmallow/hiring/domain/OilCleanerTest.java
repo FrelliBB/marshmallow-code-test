@@ -5,13 +5,14 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.Set;
 
+import static com.marshmallow.hiring.domain.Vector.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OilCleanerTest {
 
-    private static final Vector OIL_PATCH_1 = Vector.of(1, 1);
-    private static final Vector OIL_PATCH_2 = Vector.of(2, 2);
-    private static final Vector OIL_PATCH_3 = Vector.of(3, 3);
+    private static final Vector OIL_PATCH_1 = vector(1, 1);
+    private static final Vector OIL_PATCH_2 = vector(2, 2);
+    private static final Vector OIL_PATCH_3 = vector(3, 3);
     private static final Set<Vector> OIL_PATCHES = Set.of(OIL_PATCH_1, OIL_PATCH_2, OIL_PATCH_3);
 
     @Test
@@ -24,7 +25,7 @@ class OilCleanerTest {
 
     @Test
     public void cleanLocation_noOilPatch() {
-        OilCleaner cleaner = new OilCleaner(OIL_PATCHES).cleanLocation(Vector.of(0, 0));
+        OilCleaner cleaner = new OilCleaner(OIL_PATCHES).cleanLocation(vector(0, 0));
 
         assertThat(cleaner.getOilPatchLocations()).isEqualTo(OIL_PATCHES);
         assertThat(cleaner.getOilPatchesCleaned()).isEqualTo(0);

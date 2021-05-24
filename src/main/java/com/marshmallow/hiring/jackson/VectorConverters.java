@@ -5,6 +5,7 @@ import com.marshmallow.hiring.domain.Vector;
 import com.marshmallow.hiring.exception.VectorDeserializationException;
 import lombok.NoArgsConstructor;
 
+import static com.marshmallow.hiring.domain.Vector.vector;
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
@@ -23,7 +24,7 @@ public final class VectorConverters {
         @Override
         public Vector convert(int[] value) {
             if (value.length == 2) {
-                return Vector.of(value[0], value[1]);
+                return vector(value[0], value[1]);
             }
 
             throw new VectorDeserializationException(value);
