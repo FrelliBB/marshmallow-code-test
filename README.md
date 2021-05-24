@@ -36,6 +36,12 @@ all possible edge cases at once. The three components are:
 - `Robot` Accepts `Direction` instructions and ties the above two together to orchestrate navigation. Can generate the
   status report of the process.
 
+#### Assumptions
+
+- If the Robot's starting position is on an oil patch, that patch is automatically cleaned.
+- There can only be a single oil patch at a specified co-ordinate, any duplicate oil patch co-ordinates in the request
+  are ignored.
+
 ### Immutability
 
 All domain objects are immutable and thus cannot be changed once initialized. Any methods that would change the state of
