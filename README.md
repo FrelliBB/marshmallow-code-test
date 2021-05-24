@@ -1,7 +1,7 @@
 # M4R-5H Oil Cleaner
 
 | [API Documentation](http://localhost:8080/swagger-ui.html) | [Healthcheck](http://localhost:8081/actuator/health)
-| [JMX](http://localhost:8081/actuator/hawtio) | [Metrics](http://localhost:8081/actuator/prometheus)
+| [JMX](http://localhost:8081/actuator/hawtio) | [Metrics](http://localhost:8081/actuator/prometheus) |
 
 [comment]: <> (I would normally link to a staging or production environment for the above URLs rather than the 
 localhost version.)
