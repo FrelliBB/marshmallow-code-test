@@ -1,7 +1,6 @@
 package com.marshmallow.hiring.web;
 
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +36,11 @@ class InstructionsControllerTest {
         return new String(readAllBytes(get(getSystemResource(name).toURI())));
     }
 
-    @Test
-    void basicInstructionsExample_successful() throws Exception {
-        String request = readFile("basicInstructionsExample/request.json");
-        String response = readFile("basicInstructionsExample/response.json");
+    @ParameterizedTest
+    @ValueSource(strings = {"oilPatchesEverywhere", "providedExample"})
+    void instructionExamples_successful(String example) throws Exception {
+        String request = readFile(example + "/request.json");
+        String response = readFile(example + "/response.json");
 
         mockMvc.perform(REQUEST_BUILDER.content(request))
                 .andExpect(status().isOk())
